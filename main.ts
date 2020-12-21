@@ -28,6 +28,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     info.changeLifeBy(-3)
     scene.cameraShake(8, 500)
 })
+let projectile2: Sprite = null
 let myEnemy: Sprite = null
 let projectile: Sprite = null
 let mySprite: Sprite = null
@@ -175,6 +176,28 @@ mySprite = sprites.create(img`
 controller.moveSprite(mySprite)
 mySprite.setFlag(SpriteFlag.StayInScreen, true)
 game.onUpdateInterval(1000, function () {
+    projectile2 = sprites.createProjectileFromSide(img`
+        . . . . . . . 8 . 8 . . . . . . 
+        . . . . 8 8 . 8 8 8 . 8 8 . . . 
+        . . . . 8 8 8 8 8 8 8 8 8 . . . 
+        . . . . . 8 8 8 8 8 8 8 . . . . 
+        . . . . . . 8 8 8 8 8 . . . . . 
+        . . . . . . . 8 9 8 . . . . . . 
+        . . . . . . . 8 9 8 . . . . . . 
+        . . . . . . . 8 8 8 . . . . . . 
+        . . . . . . . . 8 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, 0, 50)
+    projectile2.setKind(SpriteKind.Enemy)
+    projectile2.x = randint(0, 160)
+})
+game.onUpdateInterval(1000, function () {
     myEnemy = sprites.createProjectileFromSide(img`
         . a a a 2 2 a 2 2 a 2 2 a a a . 
         . . a a a a a 2 2 a a a a . . . 
@@ -195,4 +218,7 @@ game.onUpdateInterval(1000, function () {
         `, 0, 50)
     myEnemy.setKind(SpriteKind.Enemy)
     myEnemy.x = randint(0, 160)
+})
+forever(function () {
+    music.playMelody("C5 A C5 F B E C C5 ", 120)
 })
