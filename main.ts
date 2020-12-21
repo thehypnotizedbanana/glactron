@@ -175,7 +175,7 @@ mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 mySprite.setFlag(SpriteFlag.StayInScreen, true)
-game.onUpdateInterval(1000, function () {
+game.onUpdateInterval(2000, function () {
     projectile2 = sprites.createProjectileFromSide(img`
         . . . . . . . 8 . 8 . . . . . . 
         . . . . 8 8 . 8 8 8 . 8 8 . . . 
@@ -197,7 +197,7 @@ game.onUpdateInterval(1000, function () {
     projectile2.setKind(SpriteKind.Enemy)
     projectile2.x = randint(0, 160)
 })
-game.onUpdateInterval(1000, function () {
+game.onUpdateInterval(2000, function () {
     myEnemy = sprites.createProjectileFromSide(img`
         . a a a 2 2 a 2 2 a 2 2 a a a . 
         . . a a a a a 2 2 a a a a . . . 
@@ -219,6 +219,31 @@ game.onUpdateInterval(1000, function () {
     myEnemy.setKind(SpriteKind.Enemy)
     myEnemy.x = randint(0, 160)
 })
+game.onUpdateInterval(2000, function () {
+    projectile = sprites.createProjectileFromSide(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . 2 . . . 2 . . . . . . 
+        . . . . . 2 . . . 2 . . . . . . 
+        . . . . . 2 2 2 2 2 . . . . . . 
+        . . . . 2 2 2 8 2 2 2 . . . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        . . 2 2 f . 2 8 2 . f 2 2 . . . 
+        . . 2 . f . 2 8 2 . f . 2 . . . 
+        . . . . . . . 2 . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, 0, 50)
+    projectile.setKind(SpriteKind.Enemy)
+    projectile.x = randint(0, 160)
+})
 forever(function () {
     music.playMelody("C5 A C5 F B E C C5 ", 120)
+})
+forever(function () {
+    projectile2.follow(mySprite)
 })
